@@ -4,8 +4,14 @@ version = "0.1.0"
 description = ""
 authors = ["fastio.dev <opensource@fastio.dev>"]
 
+[tool.poetry.scripts]
+fastio = "fastio_cli.cli:cli"
+
 [tool.poetry.dependencies]
 python = "^3.8"
+click = "^8.0.1"
+pydantic = "^1.8.2"
+Jinja2 = "^3.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"

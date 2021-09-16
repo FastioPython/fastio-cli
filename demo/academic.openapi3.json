@@ -1,0 +1,60 @@
+{
+	"openapi": "3.0.2",
+	"info": {
+		"title": "MyService",
+		"version": "0.1.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8000/v1"
+		}
+	],
+	"components": {
+		"schemas": {
+			"ApiResponse": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"success": {
+						"type": "string"
+					},
+					"message": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	},
+	"paths": {
+		"/health": {
+			"get": {
+				"servers": [
+					{
+						"url": "http://localhost:8000"
+					}
+				],
+				"tags": [
+					"health"
+				],
+				"summary": "Health check",
+				"description": "Health check api is working",
+				"operationId": "health",
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ApiResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
