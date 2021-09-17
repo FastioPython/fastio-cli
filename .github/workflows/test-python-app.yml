@@ -40,7 +40,7 @@ jobs:
         poetry build
     - name: Verify fastio-cli is installed before run test
       run: |
-        poetry show tree
+        poetry show --tree
         pip install dist/fastio_cli-0.1.0-py3-none-any.whl
     - name: Test with pytest
       run: |
