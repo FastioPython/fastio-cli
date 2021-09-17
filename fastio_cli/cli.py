@@ -1,5 +1,5 @@
 import click
-from source.utils import (
+from .utils import (
     camel_to_snake
 )
 

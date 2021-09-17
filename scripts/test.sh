@@ -4,6 +4,4 @@ set -e
 set -x
 
 bash ./scripts/lint.sh
-
-# shellcheck disable=SC2068
-pytest --cov=fastio_cli --cov=tests --cov-report=term-missing:skip-covered --cov-report=xml tests ${@}
+pytest --cov=fastio_cli --cov=tests --color yes --cov-config=.coveragerc --cov-report=xml
