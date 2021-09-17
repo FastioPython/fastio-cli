@@ -2,6 +2,8 @@
 
 [![tests](https://github.com/FastioPython/fastio-cli/actions/workflows/ci-test.yml/badge.svg?branch=main)](https://codecov.io/gh/FastioPython/fastio-cli)
 [![codecov](https://codecov.io/gh/FastioPython/fastio-cli/branch/main/graph/badge.svg?token=0C31IKNYMF)](https://codecov.io/gh/FastioPython/fastio-cli)
+[![build](https://scrutinizer-ci.com/g/FastioPython/fastio-cli/badges/build.png?b=main)](https://scrutinizer-ci.com/g/FastioPython/fastio-cli/build-status/main)
+[![code quality](https://scrutinizer-ci.com/g/FastioPython/fastio-cli/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/FastioPython/fastio-cli/?branch=main)
 
 ## Commands
 
