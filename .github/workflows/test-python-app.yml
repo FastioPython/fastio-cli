@@ -33,7 +33,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        coverage run --source=. -m py.test
-    - name: Upload coverage
-      run: |
-        coverage report -m
+        pytest
