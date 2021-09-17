@@ -44,5 +44,5 @@ jobs:
         pip install dist/fastio_cli-0.1.0-py3-none-any.whl
     - name: Test with pytest
       run: |
-        poerty shell
+        poetry shell
         poetry run pytest
