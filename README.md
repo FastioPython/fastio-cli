@@ -1,5 +1,8 @@
 # Fastio CLI 
 
+[![tests](https://github.com/FastioPython/fastio-cli/actions/workflows/ci-test.yml/badge.svg?branch=main)](https://codecov.io/gh/FastioPython/fastio-cli)
+[![codecov](https://codecov.io/gh/FastioPython/fastio-cli/branch/main/graph/badge.svg?token=0C31IKNYMF)](https://codecov.io/gh/FastioPython/fastio-cli)
+
 ## Commands
 
 In development, we need to use poetry to run the command line:
