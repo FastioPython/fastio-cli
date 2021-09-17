@@ -1,5 +1,7 @@
 # Fastio CLI 
 
+![CI Test python](https://github.com/FastioPython/fastio-cli/actions/workflows/ci-test.yml/badge.svg?branch=main)
+
 ## Commands
 
 In development, we need to use poetry to run the command line:
