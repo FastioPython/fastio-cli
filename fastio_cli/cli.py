@@ -1,11 +1,7 @@
-# https://click.palletsprojects.com/en/8.0.x/quickstart/#nesting-commands
 import click
-import os
-from .utils import (
+from source.utils import (
     camel_to_snake
 )
-from fastio_cli.initialize import Initialize
-from fastio_cli.converter.converter import BuilderSpec
 
 
 def process_common_name(ctx, param, value):
@@ -13,6 +9,7 @@ def process_common_name(ctx, param, value):
     if value is not None:
         output = camel_to_snake(value).lower()
     return output
+
 
 @click.group()
 def cli():
@@ -23,25 +20,29 @@ def cli():
 def generate():
     pass
 
+
+# Common
+@cli.command()
+def init():
+    click.echo('Initialized as fastio project')
+
+
+@click.command()
+def initdb():
+    click.echo('Initialized the database')
+
+
+@click.command()
+def dropdb():
+    click.echo('Dropped the database')
+
+
 # OpenAPI
 @cli.command()
 @click.option('--file', help='Open api json file')
 def openapi(file: str):
     click.echo('Generated project from openapi file')
 
-
-# Common
-@click.command()
-def initdb():
-    click.echo('Initialized the database')
-
-@click.command()
-def dropdb():
-    click.echo('Dropped the database')
-
-@cli.command()
-def init():
-    click.echo('Initialized as fastio project')
 
 # Generate
 @cli.command()
@@ -87,7 +88,7 @@ def test(name: str, unit: bool, feature: bool):
     if test_type:
         click.echo(f"Generated app/Tests/{test_type}/{name}.py")
     else:
-        click.echo("Require type of test, use: --unit or --feature")
+        click.echo("The flag --unit or --feature is required")
 
 
 @cli.command()

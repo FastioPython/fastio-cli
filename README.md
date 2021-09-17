@@ -2,9 +2,37 @@
 
 ## Commands
 
-Avaiable development commands
+In development, we need to use poetry to run the command line:
+
+```shell
+poetry run fastio <commands>
+```
+
+Available commands are listed as below.
+
+### Common
+
+Syntax
+
+> fastio [command]
+
+Initialize database
+
+```shell
+poetry run fastio initdb
+```
+
+Drop database
+
+```shell
+poetry run fastio dropdb
+```
 
 ### OpenAPI 
+
+Syntax
+
+> fastio openapi [command]
 
 Commands for working with open api spec.
 
@@ -20,19 +48,11 @@ Generate project from openapi json file
 poetry run fastio openapi --file=academic.openapi3.json
 ```
 
-### Common
+## Generator
 
-Initialize database
+Syntax
 
-```shell
-poetry run fastio initdb
-```
-
-Drop database
-
-```shell
-poetry run fastio initdb
-```
+> fastio generate [component] [name]
 
 Generate a model class
 
@@ -49,7 +69,7 @@ poetry run fastio generate request UserCreateRequest
 Generate a resource class
 
 ```shell
-poetry run fastio generate resource UserCreateRequest
+poetry run fastio generate resource UserResource
 ```
 
 Generate a repository class
@@ -110,3 +130,15 @@ poetry check
 poetry search
 ```
 
+### Tools and IDE
+
+We use PyCharm IDE for working closely on this project.
+
+PyCharm IDE is a powerful IDE for working with python, support manage environments, 
+easy to run test with coverage and lint the python code and more.
+
+## Reference
+
+- [Pytest](https://docs.pytest.org/en/6.2.x/customize.html)
+- [Pytest-cov](https://pytest-cov.readthedocs.io/en/latest/config.html)
+- [Click](https://click.palletsprojects.com/en/8.0.x/)
