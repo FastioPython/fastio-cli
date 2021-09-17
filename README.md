@@ -123,6 +123,9 @@ poetry add <package>
 # Run pytest
 poetry run pytest
 
+# Run lint with flake8
+poetry run flake8
+
 # Validates the structure of the pyproject.toml 
 poetry check
 

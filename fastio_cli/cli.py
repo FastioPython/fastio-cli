@@ -97,7 +97,7 @@ def event(name: str):
     click.echo(f"Generated app/Events/{name}.py")
 
 
-# group: generate 
+# group: generate
 generate.add_command(model)
 generate.add_command(request)
 generate.add_command(resource)

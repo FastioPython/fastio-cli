@@ -1,0 +1,10 @@
+[flake8]
+ignore = D203
+include = fastio_cli, tests
+exclude = .git,venv*,__pycache__,docs/source/conf.py,old,build,dist,source,example
+per-file-ignores = __init__.py:F401
+count = True
+exist-zero = True
+max-complexity = 10
+max-line-length = 127
+statistics=True
