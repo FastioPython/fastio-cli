@@ -1,3 +1,7 @@
+import json
+import os
+
+from fastio_cli.initializer import Initializer
 from .base import BaseTestCase
 
 
@@ -25,6 +29,18 @@ class TestCommonCommands(BaseTestCase):
         result = self.call_command(cmd)
         assert result.returncode == 0
         assert result.stdout == 'Dropped the database\n'
+
+    def test_command_read_config(self):
+        # Prepare: config file
+        project_root = os.getcwd()
+        initializer = Initializer(project_root=project_root)
+        initializer.write_config()
+
+        # Run command: fastio config --show
+        cmd = ['fastio', 'config', '--show']
+        result = self.call_command(cmd)
+        assert result.returncode == 0
+        assert json.loads(result.stdout) == initializer.read_config()
 
 
 class TestOpenapiCommands(BaseTestCase):
