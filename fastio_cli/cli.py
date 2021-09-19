@@ -1,8 +1,10 @@
+import os
+
 import click
 from .utils import (
     camel_to_snake
 )
-
+from fastio_cli.initializer import Initializer
 
 def process_common_name(ctx, param, value):
     output = ''
@@ -24,6 +26,8 @@ def generate():
 # Common
 @cli.command()
 def init():
+    project_root = os.getcwd()
+    Initializer(project_root)
     click.echo('Initialized as fastio project')
 
 
