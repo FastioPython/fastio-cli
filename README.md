@@ -138,6 +138,18 @@ poetry check
 poetry search
 ```
 
+## Testing
+
+Run these command to tests:
+
+```shell
+# Install latest current package
+poetry install
+
+# Run tests
+poetry run test
+```
+
 ### Tools and IDE
 
 We use PyCharm IDE for working closely on this project.
