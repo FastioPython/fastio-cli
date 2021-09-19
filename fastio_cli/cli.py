@@ -1,11 +1,9 @@
 import json
 import os
-
 import click
-from .utils import (
-    camel_to_snake
-)
+from fastio_cli.utils import camel_to_snake
 from fastio_cli.initializer import Initializer
+from fastio_cli.openapi import OpenApi
 
 
 def process_common_name(ctx, param, value):
@@ -58,10 +56,19 @@ def config(show: bool):
 
 
 # OpenAPI
+# TODO: Allow select a template, default if empty
 @cli.command()
 @click.option('--file', help='Open api json file')
-def openapi(file: str):
-    click.echo('Generated project from openapi file')
+@click.option('--template', default='starter', help='Choose a project template')
+def openapi(file: str, template: str):
+    current_dir = os.getcwd()
+    file_path = f"{current_dir}/{file}"
+    if os.path.isfile(file_path):
+        openapi = OpenApi(project_root=current_dir, swagger_file=file_path, template=template)
+        openapi.generate()
+        click.echo('Generated project from openapi file')
+    else:
+        click.echo(f"File {file} is not exist!")
 
 
 # Generate

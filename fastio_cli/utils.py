@@ -15,3 +15,9 @@ def read_json(file_path: str) -> dict:
 def write_json(file_path: str, data: dict) -> dict:
     with open(file_path, 'w') as outfile:
         json.dump(data, outfile, indent=2)
+
+
+def dict_first_key(d: dict):
+    if len(d.keys()):
+        return list(d.keys())[0]
+    return None
