@@ -1,3 +1,4 @@
+import json
 import os
 
 import click
@@ -5,6 +6,7 @@ from .utils import (
     camel_to_snake
 )
 from fastio_cli.initializer import Initializer
+
 
 def process_common_name(ctx, param, value):
     output = ''
@@ -27,7 +29,8 @@ def generate():
 @cli.command()
 def init():
     project_root = os.getcwd()
-    Initializer(project_root)
+    initializer = Initializer(project_root)
+    initializer.write_config()
     click.echo('Initialized as fastio project')
 
 
@@ -39,6 +42,19 @@ def initdb():
 @click.command()
 def dropdb():
     click.echo('Dropped the database')
+
+
+# Configuration
+@cli.command()
+@click.option('--show', is_flag=True, flag_value=True, help='Show fastio-cli configuration')
+def config(show: bool):
+    project_root = os.getcwd()
+    initializer = Initializer(project_root)
+    if show:
+        if os.path.isfile(initializer.CONFIG_FILE):
+            click.echo(json.dumps(initializer.read_config()))
+        else:
+            click.echo('Not found config file .fastio-cli.json')
 
 
 # OpenAPI
