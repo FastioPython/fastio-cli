@@ -66,6 +66,7 @@ class Apis(BaseModel):
 
 
 class ProjectConfig(BaseModel):
+    project_root_dir: str
     router_admin_dir: str
     api_admin_dir: str
     router_client_dir: str

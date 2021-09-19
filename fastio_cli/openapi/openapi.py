@@ -40,19 +40,21 @@ class OpenApi:
     PROJECT_ROOT = ''
 
     def __init__(self, project_root: str, swagger_file: str, template: str) -> None:
+        self.PROJECT_ROOT = project_root
         self.load(swagger_file)
         self.use_template(template_name=template)
         self.mapping()
 
     def use_template(self, template_name):
         if template_name == 'starter':
-            self.TEMPLATE = StandardTemplate()
+            self.TEMPLATE = StandardTemplate(project_root=self.PROJECT_ROOT)
             self.TEMPLATE.set_swagger_data(self.get_data())
 
     # TODO: Download standard template from github
     # TODO: Generate files from open api
     def generate(self):
         pass
+        # self.TEMPLATE.generate_base_project()
 
     def load(self, swagger_file):
         with open(swagger_file) as json_file:

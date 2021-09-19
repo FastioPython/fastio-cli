@@ -1,0 +1,14 @@
+from pydantic import BaseModel
+from typing import Optional
+
+
+class {{ class_name }}CreateRequest(BaseModel):
+    {%- for field in fields %}
+    {{ field.name }}: {{ field.type_hint }} {%- if not field.required %} = {{ field.default }}{%- endif -%}
+    {% endfor %}
+
+
+class {{ class_name }}UpdateRequest(BaseModel):
+    {%- for field in fields %}
+    {{ field.name }}: Optional[{{ field.type_hint }}] {%- if not field.required %} = {{ field.default }}{%- endif -%}
+    {% endfor %}

@@ -1,0 +1,38 @@
+from orator.seeds import Seeder
+from orator.orm import Factory
+from App.Models.{{ filename }} import {{ class_name }}
+import uuid
+import random
+
+
+def {{ filename }}_factory(faker):
+    return {
+        {% for field in fields -%}
+        {%- if field.name != 'id' -%}
+        '{{ field.name }}': 
+        {%- if field.datatype == 'string' -%} 
+        faker.text(10) 
+        {%- elif field.datatype == 'integer' -%} 
+        faker.random_int() 
+        {%- elif field.datatype == 'boolean' -%} 
+        faker.boolean()
+        {%- elif field.datatype == 'date' -%} 
+        faker.date(pattern='%Y-%m-%d') 
+        {%- elif field.datatype == 'datetime' -%} 
+        faker.date_time()
+        {%- else -%}
+        faker.text(5) 
+        {%- endif -%},
+        {%- endif -%}
+        
+        {% endfor -%}
+    }
+
+class {{ class_name }}TableSeeder(Seeder):
+
+    def run(self):
+        """
+        Run the database seeds.
+        """
+        self.factory.register({{ class_name }}, {{ filename }}_factory)
+        self.factory({{ class_name }}, 50).create()

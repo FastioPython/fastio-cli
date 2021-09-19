@@ -1,0 +1,15 @@
+from orator.seeds import Seeder
+{%- for item in items %}
+from App.Database.Seeds.{{item.filename}}_table_seeder import {{item.class_name}}TableSeeder
+{%- endfor %}
+
+
+class DatabaseSeeder(Seeder):
+
+    def run(self):
+        """
+        Run the database seeds.
+        """
+        {%- for item in items %}
+        self.call({{item.class_name}}TableSeeder)
+        {%- endfor -%}

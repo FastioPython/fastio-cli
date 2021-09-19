@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  
+  backend:
+    image: backend:1.0
+    build: 
+      context: .
+    ports: 
+      - 8000:80
+    volumes: 
+      - ./App:/usr/src/app/App
+    
+    

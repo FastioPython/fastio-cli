@@ -1,0 +1,13 @@
+from fastapi import APIRouter
+from App.Api.v1.endpoints import (
+    {%- for item in items -%}
+    {{item.filename}}_api,
+    {%- endfor -%}
+)
+
+api_router = APIRouter()
+
+{% for item in items -%}
+api_router.include_router({{item.filename}}_api.router, prefix="/{{item.filename}}", tags=["{{item.filename}}"])
+{% endfor %}
+

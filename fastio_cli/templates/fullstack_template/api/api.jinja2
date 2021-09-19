@@ -1,0 +1,49 @@
+from fastapi import APIRouter, Depends, HTTPException, Response, status
+from App.Http.Responses.{{filename}}_response import (
+    {{class_name}}ItemResponse, {{class_name}}PaginationResponse
+)
+from App.Http.Requests.{{filename}}_request import (
+    {{class_name}}CreateRequest, {{class_name}}UpdateRequest
+)
+from App.Repositories.{{filename}}_repository import {{class_name}}Repository
+
+router = APIRouter()
+
+{{filename}}Repository = {{class_name}}Repository()
+    
+@router.get("/", response_model={{class_name}}PaginationResponse)
+async def index(per_page: int=10, page: int=1):
+    {{filename}}s = {{filename}}Repository.paginate(per_page, page)
+    return {{filename}}s
+
+
+@router.get("/{id}", response_model={{class_name}}ItemResponse)
+async def detail(id: int):
+    {{filename}} = {{filename}}Repository.find(id)
+    return {{filename}}
+
+
+@router.post("/", response_model={{class_name}}ItemResponse, status_code=status.HTTP_201_CREATED)
+async def create(request: {{class_name}}CreateRequest):
+    {{filename}} = {{filename}}Repository.create(request)
+    return {{filename}}
+
+
+@router.put("/{id}", response_model={{class_name}}ItemResponse)
+async def update(id: int, request: {{class_name}}UpdateRequest):
+    {{filename}} = {{filename}}Repository.update(id, request)
+    return {{filename}}
+
+
+@router.delete("/{id}")
+async def delete(id: int, response: Response):
+    is_deleted = {{filename}}Repository.delete(id)
+    if is_deleted is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        message = '{{class_name}} {id} is not found!'.format(id=id)
+    elif is_deleted == True:
+        message = 'Delete {{filename}} successfully'
+    return {
+        'message': message
+    }
+    

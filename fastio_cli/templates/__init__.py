@@ -1,0 +1,1 @@
+from fastio_cli.templates.fullstack_template.main import StandardTemplate

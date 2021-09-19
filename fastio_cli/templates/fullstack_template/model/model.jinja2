@@ -1,0 +1,51 @@
+from orator import Model
+from orator.orm import has_many
+
+from App.Database.db import Model
+
+{%- if description %}
+    """
+    {{ description }}
+    """
+{%- endif %}
+
+class {{ class_name }}Observer(object):
+
+    def creating(self, model):
+        pass
+
+    def saving(self, model):
+        pass
+
+    def saved(self, model):
+        pass
+
+
+class {{ class_name }}(Model):
+
+    __table__ = '{{ filename }}'
+
+    __fillable__ = [
+        {% for field in fields -%}
+        '{{ field.name }}',
+        {% endfor %}
+    ]
+
+    __dates__ = [
+        {% for field in fields -%}
+        {%- if field.type == 'date' or field.type == 'datetime' %}
+        '{{ field.name }}',
+        {%- endif -%}
+        {% endfor %}
+    ]
+
+    __hidden__ = []
+
+    __casts__ = {
+        {% for field in fields -%}
+        '{{ field.name }}': '{{ field.type_hint }}',
+        {% endfor %}
+    }
+
+
+{{ class_name }}.observe({{ class_name }}Observer())

@@ -1,0 +1,8 @@
+from App.Repositories.base_repository import BaseRepository
+from App.Http.Requests.{{ filename }}_request import {{ class_name }}CreateRequest
+
+from App.Models.{{ filename }} import {{ class_name }}
+
+class {{ class_name }}Repository(BaseRepository):
+
+    _model = {{ class_name }}

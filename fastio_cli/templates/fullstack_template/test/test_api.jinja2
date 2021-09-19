@@ -1,0 +1,47 @@
+import json 
+from fastapi.testclient import TestClient
+from App.app import app
+from App.Tests.helper import objectKeyExist
+from App.Database.Seeds.{{filename}}_table_seeder import {{class_name}}TableSeeder, {{ filename }}_factory
+from App.Http.Responses.{{filename}}_response import (
+    {{class_name}}ItemResponse, {{class_name}}PaginationResponse
+)
+from App.Http.Requests.{{filename}}_request import (
+    {{class_name}}CreateRequest, {{class_name}}UpdateRequest
+)
+
+from faker import Faker
+
+
+client = TestClient(app)
+
+faker = Faker()
+
+
+def fake_request(request_params: dict):
+    default_data = {{ filename }}_factory(faker)    
+    for key, val in default_data.items():
+        if key in request_params:
+            request_params[key] = val
+    return request_params
+
+
+
+class Test{{ class_name }}:
+    
+    {{ filename }}_api_root = '/{{ filename }}/'
+
+    def test_create_{{ filename }}(self):
+        create_request = {{class_name}}CreateRequest()      
+        payload = fake_request(create_request.dict())
+
+        response = client.post(
+            self.{{ filename }}_api_root,
+            json=payload
+        )
+        assert response.status_code == 201
+        
+
+    def test_get_list_{{ filename }}(self):
+        response = client.get(self.{{ filename }}_api_root)
+        assert response.status_code == 200

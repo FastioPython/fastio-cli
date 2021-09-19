@@ -1,0 +1,7 @@
+fastapi==0.63.0
+uvicorn==0.13.4
+python-dotenv==0.15.0
+orator==0.9.9
+PyMySQL==1.0.2
+PyJWT==2.0.1
+aiofiles==0.6.0

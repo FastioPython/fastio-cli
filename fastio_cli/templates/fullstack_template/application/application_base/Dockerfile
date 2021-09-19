@@ -1,0 +1,24 @@
+FROM python:3.7 
+
+# First, a pre scripts
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
+
+# set the working directory in the container
+WORKDIR /usr/src/app
+
+# copy the dependencies file to the working directory
+COPY requirements.txt .
+
+# copy the content of the local src directory to the working directory
+COPY App/ ./App
+
+# install depenencies from requirements.txt file in working directory
+RUN pip install -r requirements.txt
+
+# expose application port
+EXPOSE 80
+
+# Run application
+ENV PYTHONPATH=/usr/src/app
+CMD ["/start.sh"]

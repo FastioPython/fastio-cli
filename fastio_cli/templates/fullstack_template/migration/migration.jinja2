@@ -1,0 +1,47 @@
+from orator.migrations import Migration
+
+
+class Create{{ class_name }}Table(Migration):
+
+    def up(self):
+        """
+        Run the migrations.
+        """
+        with self.schema.create('{{filename}}') as table:
+            {%- for field in fields -%}
+
+            {%- if field.datatype == 'string' %}
+
+            table.string('{{ field.name }}')
+
+            {%- elif field.datatype == 'integer' %}
+
+            {%- if field.name == 'id' %}
+            table.increments('id')
+            {%- else %}
+            table.integer('{{ field.name }}')
+            {%- endif %}
+
+            {%- elif field.type == 'date' or field.type == 'datetime' %}
+
+            table.timestamps('{{ field.name }}')
+
+            {%- elif field.type == 'boolean' %}
+
+            table.boolean('{{ field.name }}')
+
+            {%- else %}
+            
+            table.string('{{ field.name }}')
+
+            {%- endif -%}
+
+            {%- endfor %}
+
+            table.timestamps()
+
+    def down(self):
+        """
+        Revert the migrations.
+        """
+        self.schema.drop('{{filename}}')

@@ -1,0 +1,13 @@
+from typing import List, Optional
+from pydantic import BaseModel
+from .pagination_response import PaginationResponse
+
+
+class {{class_name}}ItemResponse(BaseModel):
+    {%- for field in fields %}
+    {{ field.name }}: Optional[{{ field.type_hint }}] {%- if not field.required -%} = {{ field.default }}{%- endif -%}
+    {% endfor %}
+
+
+class {{class_name}}PaginationResponse(PaginationResponse):
+    data: List[{{class_name}}ItemResponse] = []
