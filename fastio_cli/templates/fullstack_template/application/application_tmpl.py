@@ -13,10 +13,11 @@ class ApplicationTmpl:
         pass 
 
     def write(self, output_dir):
+        project_dir = f"{output_dir}/myproject"
         try:
-            if os.path.exists(output_dir):
-                rmtree(output_dir)
+            # if os.path.exists(output_dir):
+            #     rmtree(output_dir)
                 
-            copytree(src=self.tmpl_application_root, dst=output_dir, ignore=ignore_patterns('__pycache__'))
+            copytree(src=self.tmpl_application_root, dst=project_dir, ignore=ignore_patterns('__pycache__'))
         except Exception as e:
             raise e

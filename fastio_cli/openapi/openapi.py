@@ -1,4 +1,5 @@
 import json
+from fastio_cli.github import Github
 from fastio_cli.utils import camel_to_snake, dict_first_key
 from fastio_cli.openapi.models import (
     Apis, Api, ApiResponseItem, ApiRequestItem, ApiSchemas,
@@ -37,6 +38,7 @@ class OpenApi:
     )
 
     TEMPLATE = ''
+    TEMPLATE_NAME = ''
     PROJECT_ROOT = ''
 
     def __init__(self, project_root: str, swagger_file: str, template: str) -> None:
@@ -50,10 +52,13 @@ class OpenApi:
             self.TEMPLATE = StandardTemplate(project_root=self.PROJECT_ROOT)
             self.TEMPLATE.set_swagger_data(self.get_data())
 
-    # TODO: Download standard template from github
-    # TODO: Generate files from open api
+
     def generate(self):
-        pass
+        # TODO: Download standard template from github
+        github = Github()
+        github.download_template(template_name=self.TEMPLATE_NAME, to_path=self.PROJECT_ROOT)
+        print("Downloaded standard template form github")
+        # TODO: Generate files from open api
         # self.TEMPLATE.generate_base_project()
 
     def load(self, swagger_file):

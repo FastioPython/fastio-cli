@@ -5,6 +5,7 @@ from fastio_cli.utils import camel_to_snake
 from fastio_cli.initializer import Initializer
 from fastio_cli.openapi import OpenApi
 
+current_dir = os.getcwd()
 
 def process_common_name(ctx, param, value):
     output = ''
@@ -61,10 +62,13 @@ def config(show: bool):
 @click.option('--file', help='Open api json file')
 @click.option('--template', default='starter', help='Choose a project template')
 def openapi(file: str, template: str):
-    current_dir = os.getcwd()
-    file_path = f"{current_dir}/{file}"
+    if os.path.isfile(file):
+        file_path = file
+    else:
+        file_path = f"{current_dir}/{file}"
+    project_root = os.path.dirname(file_path)
     if os.path.isfile(file_path):
-        openapi = OpenApi(project_root=current_dir, swagger_file=file_path, template=template)
+        openapi = OpenApi(project_root=project_root, swagger_file=file_path, template=template)
         openapi.generate()
         click.echo('Generated project from openapi file')
     else:

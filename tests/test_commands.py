@@ -1,5 +1,5 @@
 import json
-import os
+import subprocess
 
 from fastio_cli.initializer import Initializer
 from .base import BaseTestCase
@@ -32,7 +32,7 @@ class TestCommonCommands(BaseTestCase):
 
     def test_command_read_config(self):
         # Prepare: config file
-        project_root = os.getcwd()
+        project_root = self.current_dir()
         initializer = Initializer(project_root=project_root)
         initializer.write_config()
 
@@ -51,10 +51,15 @@ class TestOpenapiCommands(BaseTestCase):
         assert result.returncode == 0
 
     def test_command_openapi_from_file(self):
-        cmd = ['fastio', 'openapi', '--file=academic.openapi3.json']
+        filename = 'academic.openapi3.json'
+        filepath = f"{self.examples_dir()}/{filename}"
+        assert self.path_exist(filepath)
+
+        cmd = ['fastio', 'openapi', f'--file={filepath}']
         result = self.call_command(cmd)
         assert result.returncode == 0
-        assert result.stdout == 'Generated project from openapi file\n'
+        assert 'Downloaded standard template form github\n' in result.stdout
+        assert 'Generated project from openapi file\n' in result.stdout
 
 
 class TestGeneratorCommands(BaseTestCase):
